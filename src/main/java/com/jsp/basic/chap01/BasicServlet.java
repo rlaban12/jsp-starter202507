@@ -42,6 +42,9 @@ public class BasicServlet extends HttpServlet {
         System.out.println("name = " + name);
         System.out.println("age = " + age);
 
+        String grade = req.getParameter("grade");
+        String message = grade.equals("F")? "재수강 대상입니다.": "통과했습니다.";
+
         // 나이를 통해 출생년도를 구함
         int birthYear = LocalDate.now().getYear() - Integer.parseInt(age) + 1;
 
@@ -62,6 +65,7 @@ public class BasicServlet extends HttpServlet {
         w.write("   \t<h1>\n");
         w.write(String.format("%s님은 %d년생입니다.", name, birthYear));
         w.write("   </h1>\n");
+        w.write("   <h2>%s</h2>".formatted(message));
         w.write("</body>\n");
         w.write("</html>");
 
